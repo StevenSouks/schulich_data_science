@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import xgboost as xgb
+import lightgbm as lgb
 from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score, roc_auc_score, RocCurveDisplay, PrecisionRecallDisplay, roc_curve, confusion_matrix, classification_report, mean_squared_error, ConfusionMatrixDisplay
 from sklearn.linear_model import LogisticRegression
 from datetime import timedelta
@@ -42,6 +44,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/mn42899/schulich_data_scienc
 df.info() # Data type
 df.head() # First 5 rows of the DataFrame
 df.describe() # Overview of DataFrame (Count, Mean, Std, Min, 25%, 50%, 75%, Max)
+df.describe(include=['O'])
 df.shape
 
 # Checking and dropping Null Values
@@ -540,12 +543,6 @@ crossVal = cross_val_score(logreg, X_train, y_train, cv=10, scoring='f1')
 # print scores
 print("Cross Validation F1 Scores:", crossVal)
 print("Mean cross validation F1 Score:", np.mean(crossVal))
-
-
-
-
-
-
 
 
 
